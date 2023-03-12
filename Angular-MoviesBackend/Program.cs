@@ -13,6 +13,19 @@ builder.Services.AddDbContext<MoviesDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyAllowedOrigins",
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:7202")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        }
+        );
+});
 
 #region Repositories
 builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
