@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 namespace BAL.Models
 {
 
-    [Table("Movies")]
     public class Movies
     {
         [Key]

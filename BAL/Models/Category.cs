@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace BAL.Models
 {
-    [Table("Category")]
     public class Category
     {
         [Key]
