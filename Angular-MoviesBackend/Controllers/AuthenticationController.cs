@@ -52,7 +52,8 @@ namespace Angular_MoviesBackend.Controllers
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
+                    expiration = token.ValidTo,
+                    userName = user.UserName.ToString()
                 });
             }
             return Unauthorized();
