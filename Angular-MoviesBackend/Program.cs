@@ -42,7 +42,8 @@ builder.Services.AddAuthentication(options =>
 });
 
 //Swagger security
-builder.Services.AddSwaggerGen(setup => {
+builder.Services.AddSwaggerGen(setup =>
+{
     // Include 'SecurityScheme' to use JWT Authentication
     var jwtSecurityScheme = new OpenApiSecurityScheme
     {
@@ -82,9 +83,11 @@ builder.Services.AddCors(options =>
     options.AddPolicy("MyAllowedOrigins",
         policy =>
         {
-            policy.WithOrigins("https://localhost:7202")
+            policy.WithOrigins("https://localhost:4200")
             .AllowAnyHeader()
-            .AllowAnyMethod();
+            .AllowAnyMethod()
+            .SetIsOriginAllowed(origin => true)
+            .AllowCredentials();
         }
         );
 });
@@ -101,6 +104,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UseCors("MyAllowedOrigins");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
