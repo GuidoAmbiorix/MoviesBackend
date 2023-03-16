@@ -26,13 +26,13 @@ namespace Angular_MoviesBackend.Controllers
         public IActionResult GetAllMovies()
         {
             var allMovies = _unitOfWork.Movies.GetAll();
-            var usersReadDTO = _mapper.Map<List<GetMoviesDTO>>(allMovies);
+            var usersReadDTO = _mapper.Map<List<GetCategoryDTO>>(allMovies);
             return Ok(usersReadDTO);
         }
 
 
         [HttpPost("AddMovie")]
-        public IActionResult AddMovie(AddMovieDTO movieDTO)
+        public IActionResult AddMovie(AddCategoryDTO movieDTO)
         {
             var movie = _mapper.Map<Movies>(movieDTO);
 
