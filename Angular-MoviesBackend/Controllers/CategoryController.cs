@@ -32,9 +32,9 @@ namespace Angular_MoviesBackend.Controllers
         [HttpPost("AddCategory")]
         public IActionResult AddMovie(AddCategoryDTO categoryDTO)
         {
-            var category = _mapper.Map<Movies>(categoryDTO);
+            var category = _mapper.Map<Category>(categoryDTO);
 
-            //_unitOfWork.Category.Add(category);
+            _unitOfWork.Category.Add(category);
             _unitOfWork.Complete();
             return Ok();
         }

@@ -8,9 +8,11 @@ namespace Angular_MoviesBackend.Profiles
     {
         public AutoMapperProfiles()
         {
-            CreateMap<Movies,AddCategoryDTO>().ReverseMap();
-            CreateMap<Movies, GetCategoryDTO>().ReverseMap();
+            CreateMap<Movies, AddMovieDTO>().ReverseMap();
+            CreateMap<Movies, GetMoviesDTO>().ReverseMap();
 
+            CreateMap<Category, AddCategoryDTO>().ReverseMap();
+            CreateMap<Category, GetCategoryDTO>().ReverseMap();
 
         }
     }
