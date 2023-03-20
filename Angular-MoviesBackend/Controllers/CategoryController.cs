@@ -2,11 +2,13 @@
 using BAL.Models;
 using BAL.ViewModels.Movie;
 using DAL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Angular_MoviesBackend.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
@@ -21,7 +23,7 @@ namespace Angular_MoviesBackend.Controllers
         }
 
         [HttpGet("GetAllCategories")]
-        public IActionResult GetAllMovies()
+        public IActionResult GetAllCategories()
         {
             var allCategories = _unitOfWork.Category.GetAll();
             var usersReadDTO = _mapper.Map<List<GetCategoryDTO>>(allCategories);
@@ -29,8 +31,17 @@ namespace Angular_MoviesBackend.Controllers
         }
 
 
+        [HttpGet("GetCategoryById")]
+        public IActionResult GetCategoryById(int id)
+        {
+            var category = _unitOfWork.Category.GerById(id);
+            var usersReadDTO = _mapper.Map<GetCategoryDTO>(category);
+            return Ok(usersReadDTO);
+        }
+
+
         [HttpPost("AddCategory")]
-        public IActionResult AddMovie(AddCategoryDTO categoryDTO)
+        public IActionResult AddCategories(AddCategoryDTO categoryDTO)
         {
             var category = _mapper.Map<Category>(categoryDTO);
 
@@ -38,5 +49,8 @@ namespace Angular_MoviesBackend.Controllers
             _unitOfWork.Complete();
             return Ok();
         }
+
+
+
     }
 }
